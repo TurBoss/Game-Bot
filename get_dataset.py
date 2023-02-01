@@ -1,18 +1,20 @@
 # Arda Mavi
 import os
 import numpy as np
+from PIL import Image
 from keras.utils import to_categorical
-from scipy.misc import imread, imresize, imsave
 from sklearn.model_selection import train_test_split
 
 def get_img(data_path):
     # Getting image array from path:
-    img = imread(data_path)
-    img = imresize(img, (150, 150, 3))
+    img = Image.open(data_path)
+    img = img.resize((150, 150))
+    img = np.array(img)
     return img
 
 def save_img(img, path):
-    imsave(path, img)
+    img = Image.fromarray(img.astype('uint8'))
+    img.save(path)
     return
 
 def get_dataset(dataset_path='Data/Train_Data'):
