@@ -16,22 +16,22 @@ from pynput.keyboard import Listener as key_listener
 
 
 def get_screenshot():
-    img = Image.open(ImageGrab.grab())
+    img = ImageGrab.grab(all_screens=False)
     img = img.resize((150, 150))
-    img = np.array(img).astype('float32') / 255.
     return img
 
 
 def save_event_keyboard(data_path, event, key):
     key = get_id(key)
-    data_path = data_path + '/-1,-1,{0},{1}'.format(event, key)
+    data_path = f'{data_path}/-1,-1,{event},{key}.png'
     screenshot = get_screenshot()
     save_img(data_path, screenshot)
     return
 
 
 def save_event_mouse(data_path, x, y):
-    data_path = data_path + '/{0},{1},0,0'.format(x, y)
+    data_path = f'{data_path}/{x},{y},0,0.png'
+    print(data_path)
     screenshot = get_screenshot()
     save_img(data_path, screenshot)
     return

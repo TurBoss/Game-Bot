@@ -12,8 +12,7 @@ def get_img(data_path):
     img = np.array(img)
     return img
 
-def save_img(img, path):
-    img = Image.fromarray(img.astype('uint8'))
+def save_img(path, img):
     img.save(path)
     return
 
